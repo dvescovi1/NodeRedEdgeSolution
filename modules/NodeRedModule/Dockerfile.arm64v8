@@ -1,4 +1,5 @@
 FROM node:10-alpine
+#FROM nodered/node-red:latest-10-minimal
 
 WORKDIR /app/
 
@@ -6,8 +7,12 @@ COPY package*.json ./
 
 RUN npm install --production
 
+RUN npm install node-red
+# Install the dashboard extension
+RUN npm install node-red-dashboard
+
 COPY azureiotedge.js ./
 
-USER node-red
+USER node
 
 CMD ["node", "azureiotedge.js"]

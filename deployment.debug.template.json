@@ -69,10 +69,17 @@
                   "9229/tcp": {}
                 },
                 "HostConfig": {
+                  "Privileged": true,
+                  "Binds":["/c/node-red:/data"],
                   "PortBindings": {
                     "9229/tcp": [
                       {
                         "HostPort": "9229"
+                      }
+                    ],
+                    "1880/tcp": [
+                      {
+                        "HostPort": "1880"
                       }
                     ]
                   }
@@ -98,6 +105,7 @@
         "schemaVersion": "1.0",
         "routes": {
           "NodeRedModuleToIoTHub": "FROM /messages/modules/NodeRedModule/outputs/* INTO $upstream",
+          "NodeRedModuleTosensor": "FROM /messages/modules/NoderedModule/outputs/output3 INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
           "sensorToNodeRedModule": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/NodeRedModule/inputs/input1\")"
         },
         "storeAndForwardConfiguration": {

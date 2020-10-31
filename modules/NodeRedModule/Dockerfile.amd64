@@ -8,6 +8,6 @@ RUN npm install --production
 
 COPY azureiotedge.js ./
 
-USER node-red
+USER node
 
 CMD ["node", "azureiotedge.js"]

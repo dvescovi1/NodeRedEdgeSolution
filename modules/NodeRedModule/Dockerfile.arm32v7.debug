@@ -10,6 +10,6 @@ COPY azureiotedge.js ./
 
 EXPOSE 9229
 
-USER node-red
+USER node
 
 CMD ["node", "--inspect=0.0.0.0:9229", "azureiotedge.js"]

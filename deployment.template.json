@@ -64,7 +64,19 @@
             "restartPolicy": "always",
             "settings": {
               "image": "${MODULES.NodeRedModule}",
-              "createOptions": {}
+              "createOptions": {
+                "HostConfig": {
+                  "Privileged": true,
+                  "Binds":["/c/node-red:/data"],
+                  "PortBindings": {
+                    "1880/tcp": [
+                      {
+                        "HostPort": "1880"
+                      }
+                    ]
+                  }
+                }
+              }
             }
           },
           "SimulatedTemperatureSensor": {
@@ -85,6 +97,7 @@
         "schemaVersion": "1.0",
         "routes": {
           "NodeRedModuleToIoTHub": "FROM /messages/modules/NodeRedModule/outputs/* INTO $upstream",
+          "NodeRedModuleTosensor": "FROM /messages/modules/NoderedModule/outputs/output3 INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
           "sensorToNodeRedModule": "FROM /messages/modules/SimulatedTemperatureSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/NodeRedModule/inputs/input1\")"
         },
         "storeAndForwardConfiguration": {
