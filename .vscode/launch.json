@@ -15,7 +15,7 @@
       "name": "NodeRedModule Local Debug (Node.js)",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/modules/NodeRedModule/app.js",
+      "program": "${workspaceRoot}/modules/NodeRedModule/azureiotedge.js",
       "console": "integratedTerminal",
       "env": {
         "EdgeHubConnectionString": "${config:azure-iot-edge.EdgeHubConnectionString}",
